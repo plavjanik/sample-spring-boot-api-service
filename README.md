@@ -1,4 +1,4 @@
-# Zowe Sample API Service
+# [Zowe](https://zowe.org/) Sample API Service &middot; [![GitHub license](https://img.shields.io/badge/license-EPL2.0-blue.svg)](https://github.com/plavjanik/sample-spring-boot-api-service/blob/master/LICENSE) [![CircleCI Status](https://circleci.com/gh/plavjanik/sample-spring-boot-api-service.svg?style=shield)](https://circleci.com/gh/plavjanik/sample-spring-boot-api-service) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](ttps://github.com/plavjanik/sample-spring-boot-api-service/blob/master/README.md)
 
 ## Getting Started
 
