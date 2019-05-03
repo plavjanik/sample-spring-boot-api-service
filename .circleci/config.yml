@@ -10,6 +10,7 @@ jobs:
           keys:
           - zowe-apiservice-gradle-{{ checksum "build.gradle" }}
       - run: gradle build
+      - run: ls -lR
       - save_cache:
           paths:
             - ~/.gradle
