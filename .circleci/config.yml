@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+ 
+    working_directory: ~/code
+     
+    steps:
+      - checkout
+ 
+      - restore_cache:
+          keys:
+          - zowe-apiservice-gradle-{{ checksum "build.gradle" }}
+ 
+      - run: gradle build
+
+       - save_cache:
+          paths:
+            - ~/.gradle
+            - ~/code/.gradle
+          key: zowe-apiservice-gradle-{{ checksum "build.gradle" }}
