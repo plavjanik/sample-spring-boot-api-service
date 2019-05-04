@@ -13,6 +13,7 @@ jobs:
           - zowe-apiservice-gradle-{{ checksum "build.gradle" }}
       - run: gradle build
       - codecov/upload:
+          context: codecov
           file: build/jacoco/test.exec
       - save_cache:
           paths:
