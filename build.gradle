@@ -38,3 +38,5 @@ jacocoTestReport {
         html.enabled true
     }
 }
+
+check.dependsOn jacocoTestReport
