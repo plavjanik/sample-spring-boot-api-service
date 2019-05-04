@@ -12,9 +12,8 @@ jobs:
           keys:
           - zowe-apiservice-gradle-{{ checksum "build.gradle" }}
       - run: gradle build
-      - run: rm build/jacoco/test.exec 
-      - codecov/upload:
-          file: build/jacoco/test.exec
+      - codecov/upload
+#          file: build/jacoco/test.exec
       - save_cache:
           paths:
             - ~/.gradle
