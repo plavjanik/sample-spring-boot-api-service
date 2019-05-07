@@ -10,7 +10,9 @@
 package org.zowe.sample.apiservice.zowe;
 
 import com.ca.mfaas.eurekaservice.client.ApiMediationClient;
+import com.ca.mfaas.eurekaservice.client.config.ApiMediationServiceConfig;
 import com.ca.mfaas.eurekaservice.client.config.Eureka;
+import com.ca.mfaas.eurekaservice.client.config.Ssl;
 import com.ca.mfaas.eurekaservice.client.impl.ApiMediationClientImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +45,18 @@ public class RegisterToApiLayer {
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
         if (enabled) {
-            apiMediationClient = new ApiMediationClientImpl();
-            config.setSsl(ssl);
-            config.setEureka(new Eureka());
-            config.getEureka().setIpAddress(ipAddress);
-            log.debug("Registering to API Mediation Layer with settings: {}", config.toString());
-            apiMediationClient.register(config);
+            register(config, ssl);
         }
+    }
+
+    public void register(ApiMediationServiceConfig config, Ssl ssl) {
+        apiMediationClient = new ApiMediationClientImpl();
+        config.setSsl(ssl);
+        config.setEureka(new Eureka(null, null, ipAddress));
+        log.info("Registering to API Mediation Layer: baseUrl={}, ipAddress={}, discoveryServiceUrls={}",
+                config.getBaseUrl(), config.getEureka().getIpAddress(), config.getDiscoveryServiceUrls());
+        log.debug("Registering to API Mediation Layer with settings: {}", config.toString());
+        log.debug("API Info: {}", config.getApiInfo().get(0).toString());
+        apiMediationClient.register(config);
     }
 }

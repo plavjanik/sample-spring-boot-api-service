@@ -26,30 +26,32 @@ springfox.documentation.swagger.v2.path: /apiDocs/v2
 
 apiml:
     service:
+        # Following values are default values that can be changed by user:
         serviceId: zowesample
         title: Zowe Sample API Service
         description: Sample Spring Boot API service that provides REST API
-
-        scheme: http
-        baseUrl: ${apiml.service.scheme}://${apiml.service.hostname}:${server.port}/
-        homePageRelativeUrl:
-        statusPageRelativeUrl: /actuator/info
-        healthCheckRelativeUrl: /actuator/health
-        routes:
-            - gatewayUrl: api/v1
-              serviceUrl: /api/v1
-        apiInfo:
-            apiId: org.zowe.sample.api
-            title: Zowe Sample REST API
-            description: Sample Spring Boot REST API for Zowe
-            version: 1.0.0
-            gatewayUrl: api/v1
-            swaggerUrl: ${apiml.service.scheme}://${apiml.service.hostname}:${server.port}/api/v1/apiDoc
         catalogUiTile:
             id: sample
             title: Sample API Services
             description: Sample API services to demonstrate exposing a REST API service in the Zowe ecosystem
             version: 1.0.0
+
+        # Following values are provided by the developer:
+        scheme: http
+        baseUrl: ${apiml.service.scheme}://${apiml.service.hostname}:${server.port}/
+        homePageRelativeUrl:
+        statusPageRelativeUrl: actuator/info
+        healthCheckRelativeUrl: actuator/health
+        routes:
+            - gatewayUrl: api/v1
+              serviceUrl: /api/v1
+        apiInfo:
+            - apiId: org.zowe.sample.api
+              gatewayUrl: api/v1
+              version: 1.0.0
+              title: Zowe Sample REST API
+              description: Sample Spring Boot REST API for Zowe
+              swaggerUrl: ${apiml.service.scheme}://${apiml.service.hostname}:${server.port}/api/v1/apiDocs
 
 ---
 spring:
