@@ -28,13 +28,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig implements WebMvcConfigurer {
-    @Value("${apiml.service.apiInfo[0].title}")
+    @Value("${apiml.service.apiInfo.title}")
     private String apiTitle;
 
-    @Value("${apiml.service.apiInfo[0].version}")
+    @Value("${apiml.service.apiInfo.version}")
     private String apiVersion;
 
-    @Value("${apiml.service.apiInfo[0].description}")
+    @Value("${apiml.service.apiInfo.description}")
     private String apiDescription;
 
 
