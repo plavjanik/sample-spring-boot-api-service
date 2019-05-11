@@ -18,13 +18,19 @@ public class SafPlatformUser implements PlatformUser {
         try {
             Object safReturned = Class.forName("com.ibm.os390.security.PlatformUser")
                     .getMethod("authenticate", String.class, String.class).invoke(null, userid, password);
-            Class<?> returnedClass = safReturned.getClass();
-            return PlatformReturned.builder().success(returnedClass.getField("success").getBoolean(safReturned))
-                    .errno(returnedClass.getField("errno").getInt(safReturned))
-                    .errno2(returnedClass.getField("errno2").getInt(safReturned))
-                    .errnoMsg((String) returnedClass.getField("errnoMsg").get(safReturned))
-                    .stringRet((String) returnedClass.getField("stringRet").get(safReturned))
-                    .objectRet(returnedClass.getField("objectRet").get(safReturned)).build();
+            if (safReturned == null) {
+                return null;
+            }
+            else {
+                Class<?> returnedClass = Class.forName("com.ibm.os390.security.PlatformReturned");
+                return PlatformReturned.builder().success(returnedClass.getField("success").getBoolean(safReturned))
+                        .rc(returnedClass.getField("rc").getInt(safReturned))
+                        .errno(returnedClass.getField("errno").getInt(safReturned))
+                        .errno2(returnedClass.getField("errno2").getInt(safReturned))
+                        .errnoMsg((String) returnedClass.getField("errnoMsg").get(safReturned))
+                        .stringRet((String) returnedClass.getField("stringRet").get(safReturned))
+                        .objectRet(returnedClass.getField("objectRet").get(safReturned)).build();
+            }
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
                 | SecurityException | ClassNotFoundException | NoSuchFieldException e) {
             throw new RuntimeException(e.getMessage(), e);

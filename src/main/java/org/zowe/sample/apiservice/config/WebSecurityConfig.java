@@ -24,6 +24,7 @@ import org.zowe.zos.security.ZosAuthenticationProvider;
 @EnableWebSecurity
 @ComponentScan("org.zowe.zos.security")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());

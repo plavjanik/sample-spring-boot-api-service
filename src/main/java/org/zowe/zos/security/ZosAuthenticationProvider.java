@@ -13,6 +13,7 @@ package org.zowe.zos.security;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class ZosAuthenticationProvider implements AuthenticationProvider {
+public class ZosAuthenticationProvider implements AuthenticationProvider, InitializingBean {
     private PlatformUser platformUser = null;
 
     @Autowired
@@ -45,6 +46,16 @@ public class ZosAuthenticationProvider implements AuthenticationProvider {
     }
 
     private PlatformUser getPlatformUser() {
+        return platformUser;
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
         if (platformUser == null) {
             if (Arrays.asList(environment.getActiveProfiles()).contains("zos")) {
                 platformUser = new SafPlatformUser();
@@ -53,11 +64,5 @@ public class ZosAuthenticationProvider implements AuthenticationProvider {
                 log.warn("The mock authentication provider is used. This application should not be used in production");
             }
         }
-        return platformUser;
-    }
-
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
