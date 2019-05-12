@@ -38,8 +38,8 @@ public class ZosAuthenticationProvider implements AuthenticationProvider, Initia
         String password = authentication.getCredentials().toString();
         PlatformReturned returned = getPlatformUser().authenticate(userid, password);
 
-        if (returned == null) {
-            return new UsernamePasswordAuthenticationToken(userid, password, new ArrayList<>());
+        if ((returned == null) || (returned.isSuccess())) {
+            return new UsernamePasswordAuthenticationToken(userid, null, new ArrayList<>());
         } else {
             throw new ZosAuthenticationException("Authentication failed: " + returned.toString(), returned);
         }
@@ -57,7 +57,7 @@ public class ZosAuthenticationProvider implements AuthenticationProvider, Initia
     @Override
     public void afterPropertiesSet() throws Exception {
         if (platformUser == null) {
-            if (Arrays.asList(environment.getActiveProfiles()).contains("zos")) {
+            if ((environment != null) && Arrays.asList(environment.getActiveProfiles()).contains("zos")) {
                 platformUser = new SafPlatformUser();
             } else {
                 platformUser = new MockPlatformUser();

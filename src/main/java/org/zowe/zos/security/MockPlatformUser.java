@@ -10,10 +10,14 @@
 package org.zowe.zos.security;
 
 public class MockPlatformUser implements PlatformUser {
+    public static final String VALID_USERID = "zowe";
+    public static final String VALID_PASSWORD = "zowe";
+    public static final String INVALID_USERID = "notzowe";
+    public static final String INVALID_PASSWORD = "notzowe";
 
     @Override
     public PlatformReturned authenticate(String userid, String password) {
-        if (userid.equalsIgnoreCase("zowe") && password.equalsIgnoreCase("zowe")) {
+        if (userid.equalsIgnoreCase(VALID_USERID) && password.equalsIgnoreCase(VALID_PASSWORD)) {
             return null;
         }
         else {
