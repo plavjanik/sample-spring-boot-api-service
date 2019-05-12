@@ -36,6 +36,7 @@ For further reference, please consider the following sections:
 * [Logging](docs/logging.md)
 * [Setup HTTPS and Create TLS/SSL Certificates](docs/https-setup.md)
 * [Integrate with Zowe API Mediation Layer](docs/zowe-integrate-with-apiml.md)
+* [Web Security](docs/web-security.md)
 * [TODO - Deployment to z/OS](docs/deployment-instructions.md)
 * [TODO - z/OS Security](docs/zos-security.md)
 * [TODO - z/OS Native code](docs/zos-native-code.md)
