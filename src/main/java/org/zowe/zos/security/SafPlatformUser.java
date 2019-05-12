@@ -12,17 +12,22 @@ package org.zowe.zos.security;
 import java.lang.reflect.InvocationTargetException;
 
 public class SafPlatformUser implements PlatformUser {
+    private final PlatformClassFactory platformClassFactory;
+
+    public SafPlatformUser(PlatformClassFactory platformClassFactory) {
+        this.platformClassFactory = platformClassFactory;
+    }
 
     @Override
     public PlatformReturned authenticate(String userid, String password) {
         try {
-            Object safReturned = Class.forName("com.ibm.os390.security.PlatformUser")
-                    .getMethod("authenticate", String.class, String.class).invoke(null, userid, password);
+            Object safReturned = platformClassFactory.getPlatformUserClass()
+                    .getMethod("authenticate", String.class, String.class)
+                    .invoke(platformClassFactory.getPlatformUser(), userid, password);
             if (safReturned == null) {
                 return null;
-            }
-            else {
-                Class<?> returnedClass = Class.forName("com.ibm.os390.security.PlatformReturned");
+            } else {
+                Class<?> returnedClass = platformClassFactory.getPlatformReturnedClass();
                 return PlatformReturned.builder().success(returnedClass.getField("success").getBoolean(safReturned))
                         .rc(returnedClass.getField("rc").getInt(safReturned))
                         .errno(returnedClass.getField("errno").getInt(safReturned))
@@ -34,7 +39,6 @@ public class SafPlatformUser implements PlatformUser {
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
                 | SecurityException | ClassNotFoundException | NoSuchFieldException e) {
             throw new RuntimeException(e.getMessage(), e);
-
         }
     }
 

@@ -58,7 +58,7 @@ public class ZosAuthenticationProvider implements AuthenticationProvider, Initia
     public void afterPropertiesSet() throws Exception {
         if (platformUser == null) {
             if ((environment != null) && Arrays.asList(environment.getActiveProfiles()).contains("zos")) {
-                platformUser = new SafPlatformUser();
+                platformUser = new SafPlatformUser(new SafPlatformClassFactory());
             } else {
                 platformUser = new MockPlatformUser();
                 log.warn("The mock authentication provider is used. This application should not be used in production");
