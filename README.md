@@ -57,6 +57,8 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
 * [Building a RESTful Web Service with Spring Boot Actuator](https://spring.io/guides/gs/actuator-service/)
 * [Setting Up Swagger 2 with a Spring REST API](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
+* [Spring Security Basic Authentication](https://www.baeldung.com/spring-security-basic-authentication)
+* [Spring Security Authentication Provider](https://www.baeldung.com/spring-security-authentication-provider)
 
 ### Additional Links
 
