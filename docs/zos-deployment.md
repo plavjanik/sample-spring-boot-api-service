@@ -21,8 +21,8 @@ Steps:
 
         export REPO=.
         export TARGET_DIR=<your target directory on z/OS>
-        export HOST=river.zowe.org
-        export SSH_PORT=2022
+        export HOST=<your host>
+        export SSH_PORT=22
         export USERID=<your user ID>
         export VERSION=0.0.1-SNAPSHOT
 
