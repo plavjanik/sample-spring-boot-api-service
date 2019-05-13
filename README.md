@@ -28,6 +28,8 @@ Use `zowe` as the username and `zowe` as the password.
 
 The default page <https://localhost:10080/> opens Swagger UI with the API Documentation.
 
+![Swagger UI](/docs/images/swagger.png)
+
 ## Customize and Extend Your Application
 
 For further reference, please consider the following sections:
