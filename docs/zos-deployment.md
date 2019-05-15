@@ -176,7 +176,7 @@ After bypassing the security exception, sign in with `zowe` as the user name and
 
 ![Sign in](images/sign-in.png)
 
-#### Sample API Res[pmse]
+#### Sample API Response
 
 View the sample API response:
 
