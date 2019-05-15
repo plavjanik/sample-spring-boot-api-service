@@ -164,13 +164,19 @@ Stop via: `STOP SAMPLE`.
 
 When the server is started (either through a java command or JCL), you can test the sample `api/v1/greeting` API through your web browser (as you could if they API were running on your workstation).
 
+#### Landing Page
+
 Navigate to the host and port configured in your `config/application.yml`:
 
 ![Landing](images/landing-page.png)
 
+#### Sign In
+
 After bypassing the security exception, sign in with `zowe` as the user name and password:
 
 ![Sign in](images/sign-in.png)
+
+#### Sample API Res[pmse]
 
 View the sample API response:
 
